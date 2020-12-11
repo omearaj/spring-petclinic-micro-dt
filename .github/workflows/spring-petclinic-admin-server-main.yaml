@@ -20,8 +20,7 @@ env:
   # TODO: Change Registry USERID to your userid
   REGISTRY_USERID: omearaj
   #TODO: Only change if you already have a spring-petclinic you want to keep. 
-  IMAGE_NAME: spring-petclinic-dd
-  IMAGE_BP_NAME: spring-petclinic-bp 
+  IMAGE_NAME: spring-petclinic-admin-server
 
 jobs:
 #  snyk_vulnerability_check:
@@ -76,47 +75,16 @@ jobs:
       with:
         java-version: 1.11
       
-    - name: Build with Maven & Snyk
-      env:
-        SNYK_TOKEN: ${{ secrets.SNYK_API_TOKEN }} 
+    - name: Build with Maven
       run: mvn spring-boot:build-image -Pk8s -DREPOSITORY_PREFIX=${{ env.REGISTRY.USERID }}
     
-    - uses: actions/upload-artifact@v2
+    - uses: actions/checkout@master
+    - name: Publish to Registry
+      uses: elgohr/Publish-Docker-Github-Action@master
       with:
-        name: spring-petclinic
-        path: ${{ env.github_workspace }}./target/spring-petclinic-2.3.1.BUILD-SNAPSHOT.jar
-        if-no-files-found: warn #
+       name: omearaj/${{ env.IMAGE_NAME }}
+       username: ${{ env.REGISTRY_USERID }}
+       password: ${{ secrets.DOCKER_KEY }}
+       default_branch: main
+    
         
-  # Push image to Container Registry
-  build-and-push-Docker-Image:
-    # Ensure test job passes before pushing image.
-    needs: build_mvn_aritfact
-
-    runs-on: ubuntu-latest
-    if: github.event_name == 'push'
-
-    steps:
-      - uses: actions/checkout@v2
-      
-      - uses: actions/download-artifact@v2
-        with:
-         name: spring-petclinic
-         path: ${{ env.github_workspace }}./target
-           
-      - name: Build and push Docker images
-        uses: docker/build-push-action@v1
-        with:
-         username: ${{ env.REGISTRY_USERID }}
-         password: ${{ secrets.DOCKER_KEY }}
-         repository: omearaj/${{ env.IMAGE_NAME }}
-         tag_with_ref: true
-         tag_with_sha: true  
-         add_git_labels: true  
-      
-#      - name: Run Snyk to check Docker images for vulnerabilities
-#        uses: snyk/actions/docker@master
-#        env:
-#          SNYK_TOKEN: ${{ secrets.SNYK_API_TOKEN }}
-#        with:
-#         image: omearaj/${{ env.IMAGE_NAME }}
-#         command: test  
