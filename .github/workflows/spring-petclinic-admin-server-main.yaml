@@ -81,8 +81,8 @@ jobs:
       run: |
        echo "${{ secrets.DOCKER_KEY }}" | docker login ${{ env.CONTAINER_REGISTRY_URL }} -u ${{ env.REGISTRY_USERID }} --password-stdin
     
-    - name: Setup tmate session
-      uses: mxschmitt/action-tmate@v3
+#    - name: Setup tmate session
+#      uses: mxschmitt/action-tmate@v3
     
     - name: Docker push
       run: |
