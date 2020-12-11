@@ -80,7 +80,7 @@ jobs:
       run: |
        mvn -Pk8s -pl spring-petclinic-admin-server/ spring-boot:build-image -DREPOSITORY_PREFIX=${{ env.REGISTRY_USERID }}
        echo "${{ secrets.DOCKER_KEY }}" | docker login ${{ env.CONTAINER_REGISTRY_URL }} -u ${{ env.REGISTRY_USERID }} --password-stdin
-       docker push ${{ env.REGISTRY_USERID }/admin-server:latest
+       docker push ${{ env.REGISTRY_USERID }}/admin-server:latest
       
 #    - uses: actions/checkout@master
 #    - name: Publish to Registry
