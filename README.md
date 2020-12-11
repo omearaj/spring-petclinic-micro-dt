@@ -7,7 +7,7 @@ To achieve that goal we use Spring Cloud Gateway, Spring Cloud Circuit Breaker, 
 
 This fork also demostrates the use of free distributed tracing with Tanzu Observability by Wavefront, which provides cloud-based monitoring of  Spring Boot applications with 5 days of history.
 
-
+!
 
 ## Understanding the Spring Petclinic application
 
