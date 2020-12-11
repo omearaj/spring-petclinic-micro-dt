@@ -77,15 +77,18 @@ jobs:
         java-version: 1.11
       
     - name: Build with Maven
-      run: mvn -Pk8s -pl spring-petclinic-admin-server/ spring-boot:build-image -DREPOSITORY_PREFIX=${{ env.REGISTRY_USERID }}
+      run: |
+       mvn -Pk8s -pl spring-petclinic-admin-server/ spring-boot:build-image -DREPOSITORY_PREFIX=${{ env.REGISTRY_USERID }}
+       echo "${{ secrets.DOCKER_KEY }}" | docker login ${{ env.CONTAINER_REGISTRY_URL }} -u ${{ env.REGISTRY_USERID }} --password-stdin
+       docker push omearaj/admin-server:latest
       
-    - uses: actions/checkout@master
-    - name: Publish to Registry
-      uses: elgohr/Publish-Docker-Github-Action@master
-      with:
-       name: docker.io/omearaj/admin-server:latest
-       username: ${{ env.REGISTRY_USERID }}
-       password: ${{ secrets.DOCKER_KEY }}
+#    - uses: actions/checkout@master
+#    - name: Publish to Registry
+#      uses: elgohr/Publish-Docker-Github-Action@master
+#      with:
+#       name: docker.io/omearaj/admin-server:latest
+#       username: ${{ env.REGISTRY_USERID }}
+#       password: ${{ secrets.DOCKER_KEY }}
        #default_branch: main
     
         
