@@ -79,13 +79,23 @@ jobs:
     - name: Build with Maven
       run: mvn -Pk8s -pl spring-petclinic-admin-server/ spring-boot:build-image -DREPOSITORY_PREFIX=${{ env.REGISTRY_USERID }}
     
-    - uses: actions/checkout@master
-    - name: Publish to Registry
-      uses: elgohr/Publish-Docker-Github-Action@master
+    - name: Build and push Docker images
+      uses: docker/build-push-action@v1
       with:
-       name: docker.io/omearaj/admin-server:latest
        username: ${{ env.REGISTRY_USERID }}
        password: ${{ secrets.DOCKER_KEY }}
-       default_branch: main
+       repository: omearaj/admin-server:latest
+       tag_with_ref: true
+       tag_with_sha: true  
+       add_git_labels: true 
+    
+ #   - uses: actions/checkout@master
+ #   - name: Publish to Registry
+ #     uses: elgohr/Publish-Docker-Github-Action@master
+ #     with:
+ #      name: docker.io/omearaj/admin-server:latest
+ #      username: ${{ env.REGISTRY_USERID }}
+ #      password: ${{ secrets.DOCKER_KEY }}
+ #      default_branch: main
     
         
