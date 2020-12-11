@@ -71,15 +71,15 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-maven-
     
-    - name: Set up JDK 1.8
+    - name: Set up JDK 1.11
       uses: actions/setup-java@v1
       with:
-        java-version: 1.8
+        java-version: 1.11
       
     - name: Build with Maven & Snyk
       env:
         SNYK_TOKEN: ${{ secrets.SNYK_API_TOKEN }} 
-      run: mvn install
+      run: mvn spring-boot:build-image -Pk8s -DREPOSITORY_PREFIX=${{ env.REGISTRY.USERID }}
     
     - uses: actions/upload-artifact@v2
       with:
