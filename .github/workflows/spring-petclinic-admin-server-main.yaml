@@ -84,10 +84,10 @@ jobs:
       with:
        username: ${{ env.REGISTRY_USERID }}
        password: ${{ secrets.DOCKER_KEY }}
-       repository: omearaj/admin-server
-       tag_with_ref: true
-       tag_with_sha: true  
-       add_git_labels: true 
+       repository: omearaj/admin-server:latest
+       #tag_with_ref: true
+       #tag_with_sha: true  
+       #add_git_labels: true 
     
  #   - uses: actions/checkout@master
  #   - name: Publish to Registry
