@@ -83,7 +83,7 @@ jobs:
     - name: Publish to Registry
       uses: elgohr/Publish-Docker-Github-Action@master
       with:
-       name: omearaj/${{ env.IMAGE_NAME }}
+       name: docker.io/omearaj/admin-server:latest
        username: ${{ env.REGISTRY_USERID }}
        password: ${{ secrets.DOCKER_KEY }}
        default_branch: main
