@@ -16,12 +16,10 @@ on: workflow_dispatch
 #      - .github/workflows/**
 
 env:
-  # TODO: Change registry URL if not using Docker Hub
   CONTAINER_REGISTRY_URL: https://registry.hub.docker.com
-  # TODO: Change Registry USERID to your userid
   REGISTRY_USERID: omearaj
-  #TODO: Only change if you already have a spring-petclinic you want to keep. 
   IMAGE_NAME: admin-server
+  IMAGE_TAG: latest 
 
 jobs:
 #  snyk_vulnerability_check:
@@ -82,7 +80,7 @@ jobs:
        echo "${{ secrets.DOCKER_KEY }}" | docker login ${{ env.CONTAINER_REGISTRY_URL }} -u ${{ env.REGISTRY_USERID }} --password-stdin
        docker pull omearaj/java-goof-trend:main
        docker images
-       docker push omearaj/admin-server:latest
+       docker push ${{ env.REGISTRY_USERID }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
       
 #    - uses: actions/checkout@master
 #    - name: Publish to Registry
