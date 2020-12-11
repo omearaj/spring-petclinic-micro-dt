@@ -78,7 +78,7 @@ jobs:
       run: |
        mvn -Pk8s -pl spring-petclinic-admin-server/ spring-boot:build-image -DREPOSITORY_PREFIX=${{ env.REGISTRY_USERID }}
        echo "${{ secrets.DOCKER_KEY }}" | docker login ${{ env.CONTAINER_REGISTRY_URL }} -u ${{ env.REGISTRY_USERID }} --password-stdin
-       docker pull omearaj/java-goof-trend:main
+       docker tag ${{ env.REGISTRY_USERID }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} ${{ env.REGISTRY_USERID }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
        docker images
        docker push ${{ env.REGISTRY_USERID }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
       
