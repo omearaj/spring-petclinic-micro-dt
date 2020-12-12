@@ -1,4 +1,4 @@
-me: GCP SetUp
+name: GCP SetUp
 
 on: workflow_dispatch
 
