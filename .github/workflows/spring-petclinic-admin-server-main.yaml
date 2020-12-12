@@ -75,7 +75,7 @@ jobs:
         java-version: 1.11
       
     - name: Build with Maven
-      run: mvn -Pk8s -pl spring-petclinic-admin-server/ spring-boot:build-image -DREPOSITORY_PREFIX=${{ env.REGISTRY_USERID }}
+      run: mvn -Pk8s -pl spring-petclinic-admin-server/ spring-boot:build-image -DREPOSITORY_PREFIX=${{ env.REGISTRY_USERID }} && ${{ GITHUB_WORKSPACE }}/scripts/pushImages.sh
        
     - name: Dopcker login   
       run: |
