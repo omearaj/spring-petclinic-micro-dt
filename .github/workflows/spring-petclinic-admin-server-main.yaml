@@ -85,14 +85,7 @@ jobs:
 #      uses: mxschmitt/action-tmate@v3
     
     - name: Docker push
-      run: |
-       docker images
-       echo "${{ secrets.DOCKER_KEY }}" | docker login ${{ env.CONTAINER_REGISTRY_URL }} -u ${{ env.REGISTRY_USERID }} --password-stdin
-       echo tag
-       docker tag docker.io/omearaj/admin-server:latest omearaj/admin-server:latest
-       echo push1
-       docker push omearaj/admin-server:latest
-       docker push ${{ env.REGISTRY_USERID }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+      run: docker push ${{ env.REGISTRY_USERID }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
       
 #    - uses: actions/checkout@master
 #    - name: Publish to Registry
