@@ -104,6 +104,14 @@
                     <layers>
                         <enabled>true</enabled>
                     </layers>
+                    <docker>
+					    <publishRegistry>
+						    <username>${user}</username>
+							<password>${secret}</password>
+							<url>https://registry.hub.docker.com</url>
+							<!--email>user@example.com</email-->
+						</publishRegistry>
+					</docker>
                 </configuration>
                 <executions>
                     <execution>
