@@ -2,18 +2,42 @@
 #
 name: Build & Push Admin-Server Image
 
-on: workflow_dispatch
-#on:
-#  push:
-#    branches: [ main ]
-#    paths-ignore: 
-#      - kubernetes/**
-#      - .github/workflows/**
-#  pull_request:
-#    branches: [ main ]
-#    paths-ignore:
-#      - kubernetes/**
-#      - .github/workflows/**
+#on: workflow_dispatch
+on:
+  push:
+    branches: [ main ]
+    paths-ignore: 
+      - kubernetes/**
+      - .github/workflows/**
+      - scripts/**
+      - k8s/**
+      - docker/**
+      - docs/**
+      - ci/**
+      - .mvn/wrapper
+      - spring-petclinic-api-gateway/**
+      - spring-petclinic-config-server/**
+      - spring-petclinic-customers-service/**
+      - spring-petclinic-discovery-server/**
+      - spring-petclinic-vets-service/**
+      - spring-petclinic-visits-service/**
+  pull_request:
+    branches: [ main ]
+    paths-ignore:
+      - kubernetes/**
+      - .github/workflows/**
+      - scripts/**
+      - k8s/**
+      - docker/**
+      - docs/**
+      - ci/**
+      - .mvn/wrapper
+      - spring-petclinic-api-gateway/**
+      - spring-petclinic-config-server/**
+      - spring-petclinic-customers-service/**
+      - spring-petclinic-discovery-server/**
+      - spring-petclinic-vets-service/**
+      - spring-petclinic-visits-service/**
 
 env:
   CONTAINER_REGISTRY_URL: https://registry.hub.docker.com
