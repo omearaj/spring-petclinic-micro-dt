@@ -45,14 +45,6 @@
 								<image>
 									<name>odedia/${project.artifactId}</name>
 								</image>
-                                <docker>
-						            <publishRegistry>
-							            <username>${user}</username>
-							            <password>${secret}</password>
-							            <url>https://registry.hub.docker.com</url>
-							            <!--email>user@example.com</email-->
-						            </publishRegistry>
-					            </docker>
 							</configuration>
 						</configuration>
 						<executions>
