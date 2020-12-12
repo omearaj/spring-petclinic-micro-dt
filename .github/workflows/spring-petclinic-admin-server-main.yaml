@@ -87,7 +87,8 @@ jobs:
     - name: Docker push
       run: |
        docker images
-       docker tag docker.io/omearaj/admin-server:latest ${{ env.REGISTRY_USERID }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+       docker tag docker.io/omearaj/admin-server:latest omearaj/admin-server:latest
+       docker push omearaj/admin-server:latest
        docker push ${{ env.REGISTRY_USERID }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
       
 #    - uses: actions/checkout@master
