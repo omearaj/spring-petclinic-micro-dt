@@ -19,4 +19,4 @@ jobs:
         project_id: ${{ secrets.PROJECT_ID }}
         service_account_key: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
         export_default_credentials: true
-    - run: gcloud compute instances stop dt-gateway
+    - run: gcloud compute instances stop dt-gateway --zone=${{ env.zone }}
