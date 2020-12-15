@@ -3,7 +3,8 @@ name: GCP SetUp
 on: workflow_dispatch
 
 env:
-  zone: us-central1-c 
+  zone: us-central1-c
+  nodes: 5
 
 jobs:
  GCP-create-kubernetes:
@@ -17,4 +18,4 @@ jobs:
         project_id: ${{ secrets.PROJECT_ID }}
         service_account_key: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
         export_default_credentials: true
-    - run: gcloud container clusters create ${{secrets.GKE_CLUSTER_NAME}} --zone=${{ env.zone }}
+    - run: gcloud container clusters create ${{secrets.GKE_CLUSTER_NAME}} --zone=${{ env.zone }} --num-nodes=${{ env.nodes }}
