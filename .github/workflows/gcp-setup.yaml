@@ -4,7 +4,7 @@ on: workflow_dispatch
 
 env:
   zone: us-central1-c
-  nodes: 5
+  nodes: 4
 
 jobs:
  GCP-create-kubernetes:
